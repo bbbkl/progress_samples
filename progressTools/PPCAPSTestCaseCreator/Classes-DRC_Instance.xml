@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ProDataSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="" xmlns:prodata="urn:schemas-progress-com:xml-prodata:0001">
+    <xsd:element name="ProDataSet" prodata:proDataSet="true">
+      <xsd:complexType>
+        <xsd:sequence>
+          <xsd:element name="ttProperty" minOccurs="0" maxOccurs="unbounded">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="PropertyName" type="xsd:string" nillable="true" prodata:format="x(32)"/>
+                <xsd:element name="PropertyValue" type="xsd:string" nillable="true" prodata:format="x(256)"/>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="ttDRC_Instance" minOccurs="0" maxOccurs="unbounded">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="ReconcileMode" type="xsd:int" nillable="true" prodata:format="z9"/>
+                <xsd:element name="ReconcileModeTxt" type="xsd:string" nillable="true" prodata:format="x(20)"/>
+                <xsd:element name="RecoSeq" type="xsd:int" nillable="true" prodata:format="zzz,zzz,zz9"/>
+                <xsd:element name="ChangedFields" type="xsd:string" nillable="true" prodata:format="x(256)"/>
+                <xsd:element name="AddedFields" type="xsd:string" nillable="true" prodata:format="x(256)"/>
+                <xsd:element name="WhereClausePrimary" type="xsd:string" nillable="true" prodata:format="x(256)"/>
+                <xsd:element name="WhereClauseObj" type="xsd:string" nillable="true" prodata:format="x(256)"/>
+                <xsd:element name="DRC_Instance_ID" type="xsd:string" nillable="true" prodata:format="x(45)" prodata:label="Instance Name" prodata:columnLabel="Instance Name"/>
+                <xsd:element name="DRC_Instance_Obj" type="xsd:string" nillable="true" prodata:format="x(60)" prodata:columnLabel="DRC_Instance_Obj"/>
+                <xsd:element name="DRC_Class_Obj" type="xsd:string" nillable="true" prodata:format="x(60)" prodata:columnLabel="DRC_Class_Obj"/>
+                <xsd:element name="Directory" type="xsd:string" nillable="true" prodata:format="x(60)" prodata:columnLabel="Directory"/>
+                <xsd:element name="ttDRC_InstanceOld" minOccurs="0" maxOccurs="unbounded">
+                  <xsd:complexType>
+                    <xsd:sequence>
+                      <xsd:element name="RecoSeq" type="xsd:int" nillable="true" prodata:format="zzz,zzz,zz9"/>
+                      <xsd:element name="DRC_Instance_ID" type="xsd:string" nillable="true" prodata:format="x(45)" prodata:label="Instance Name" prodata:columnLabel="Instance Name"/>
+                      <xsd:element name="DRC_Instance_Obj" type="xsd:string" nillable="true" prodata:format="x(60)" prodata:columnLabel="DRC_Instance_Obj"/>
+                      <xsd:element name="DRC_Class_Obj" type="xsd:string" nillable="true" prodata:format="x(60)" prodata:columnLabel="DRC_Class_Obj"/>
+                      <xsd:element name="Directory" type="xsd:string" nillable="true" prodata:format="x(60)" prodata:columnLabel="Directory"/>
+                    </xsd:sequence>
+                  </xsd:complexType>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:unique name="Main" prodata:primaryIndex="true">
+        <xsd:selector xpath=".//ttProperty"/>
+        <xsd:field xpath="PropertyName"/>
+      </xsd:unique>
+      <xsd:unique name="ttDRC_Instance_Main" prodata:indexName="Main" prodata:primaryIndex="true">
+        <xsd:selector xpath=".//ttDRC_Instance"/>
+        <xsd:field xpath="ReconcileMode"/>
+        <xsd:field xpath="RecoSeq"/>
+      </xsd:unique>
+      <xsd:unique name="ttDRC_InstanceOld_Main" prodata:indexName="Main" prodata:primaryIndex="true">
+        <xsd:selector xpath=".//ttDRC_InstanceOld"/>
+        <xsd:field xpath="RecoSeq"/>
+      </xsd:unique>
+    </xsd:element>
+    <xsd:annotation>
+      <xsd:appinfo>
+        <prodata:relation name="RELATION1" prodata:nested="true" prodata:parent="ttDRC_Instance" prodata:child="ttDRC_InstanceOld" prodata:relationFields="RecoSeq,RecoSeq"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+  </xsd:schema>
+  <ttProperty>
+    <PropertyName>Case_Sensitive_Index_Fields</PropertyName>
+    <PropertyValue/>
+  </ttProperty>
+  <ttProperty>
+    <PropertyName>CreationTime</PropertyName>
+    <PropertyValue>2017-02-01T14:34:38.368+01:00</PropertyValue>
+  </ttProperty>
+  <ttProperty>
+    <PropertyName>FieldList_New</PropertyName>
+    <PropertyValue>Directory,DRC_Class_Obj,DRC_Instance_ID,DRC_Instance_Obj</PropertyValue>
+  </ttProperty>
+  <ttProperty>
+    <PropertyName>FieldList_Old</PropertyName>
+    <PropertyValue>Directory,DRC_Class_Obj,DRC_Instance_ID,DRC_Instance_Obj</PropertyValue>
+  </ttProperty>
+  <ttProperty>
+    <PropertyName>new_pdbname</PropertyName>
+    <PropertyValue>d:/Projekte/proalpha/71b01/proalpha-data/demo/db/pavar</PropertyValue>
+  </ttProperty>
+  <ttProperty>
+    <PropertyName>old_pdbname</PropertyName>
+    <PropertyValue>d:\Projekte\proalpha\71b01\proalpha-data\demo\db\alt\pavar</PropertyValue>
+  </ttProperty>
+  <ttProperty>
+    <PropertyName>Query_Prepare_String</PropertyName>
+    <PropertyValue>for each DRC_Instance where yes  use-index Main</PropertyValue>
+  </ttProperty>
+  <ttProperty>
+    <PropertyName>Section</PropertyName>
+    <PropertyValue>Classes</PropertyValue>
+  </ttProperty>
+  <ttProperty>
+    <PropertyName>Selected_Index</PropertyName>
+    <PropertyValue>Main</PropertyValue>
+  </ttProperty>
+  <ttProperty>
+    <PropertyName>Selected_Index_Fields</PropertyName>
+    <PropertyValue>DRC_Instance_ID</PropertyValue>
+  </ttProperty>
+  <ttProperty>
+    <PropertyName>Seq</PropertyName>
+    <PropertyValue>3</PropertyValue>
+  </ttProperty>
+  <ttProperty>
+    <PropertyName>TableNameDB</PropertyName>
+    <PropertyValue>DRC_Instance</PropertyValue>
+  </ttProperty>
+  <ttProperty>
+    <PropertyName>TableNameXMLTT</PropertyName>
+    <PropertyValue>ttDRC_Instance</PropertyValue>
+  </ttProperty>
+  <ttProperty>
+    <PropertyName>TableNameXMLTTOld</PropertyName>
+    <PropertyValue>ttDRC_InstanceOld</PropertyValue>
+  </ttProperty>
+  <ttProperty>
+    <PropertyName>TableVersion</PropertyName>
+    <PropertyValue>1</PropertyValue>
+  </ttProperty>
+  <ttProperty>
+    <PropertyName>XMLFormat</PropertyName>
+    <PropertyValue>3.02</PropertyValue>
+  </ttProperty>
+  <ttDRC_Instance>
+    <ReconcileMode>3</ReconcileMode>
+    <ReconcileModeTxt>CREATED</ReconcileModeTxt>
+    <RecoSeq>1</RecoSeq>
+    <ChangedFields/>
+    <AddedFields/>
+    <WhereClausePrimary>where DRC_Instance_ID = &quot;PPCAPSTestCaseCreatorSvo.cls&quot;</WhereClausePrimary>
+    <WhereClauseObj>where DRC_Instance_Obj = &quot;PA1775:pA:9b98cd159a2e6f8d1f14ada6a8ceccad&quot;</WhereClauseObj>
+    <DRC_Instance_ID>PPCAPSTestCaseCreatorSvo.cls</DRC_Instance_ID>
+    <DRC_Instance_Obj>PA1775:pA:9b98cd159a2e6f8d1f14ada6a8ceccad</DRC_Instance_Obj>
+    <DRC_Class_Obj>PA1771:pA:814baa95ba01a58edf11476e0ae3e24f</DRC_Class_Obj>
+    <Directory>pps/prod/cls</Directory>
+  </ttDRC_Instance>
+  <ttDRC_Instance>
+    <ReconcileMode>3</ReconcileMode>
+    <ReconcileModeTxt>CREATED</ReconcileModeTxt>
+    <RecoSeq>2</RecoSeq>
+    <ChangedFields/>
+    <AddedFields/>
+    <WhereClausePrimary>where DRC_Instance_ID = &quot;PPCAPSTestCaseCreatorSvoStd.cls&quot;</WhereClausePrimary>
+    <WhereClauseObj>where DRC_Instance_Obj = &quot;PA1775:pA:9b98cd159a2e6f8d1f14aea668a9b443&quot;</WhereClauseObj>
+    <DRC_Instance_ID>PPCAPSTestCaseCreatorSvoStd.cls</DRC_Instance_ID>
+    <DRC_Instance_Obj>PA1775:pA:9b98cd159a2e6f8d1f14aea668a9b443</DRC_Instance_Obj>
+    <DRC_Class_Obj>PA1771:pA:814baa95ba01a58edf11476e0ae3e24f</DRC_Class_Obj>
+    <Directory>pps/prod/cls</Directory>
+  </ttDRC_Instance>
+</ProDataSet>

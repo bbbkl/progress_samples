@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ProDataSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="" xmlns:prodata="urn:schemas-progress-com:xml-prodata:0001">
+    <xsd:element name="ProDataSet" prodata:proDataSet="true">
+      <xsd:complexType>
+        <xsd:sequence>
+          <xsd:element name="ttProperty" minOccurs="0" maxOccurs="unbounded">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="PropertyName" type="xsd:string" nillable="true" prodata:format="x(32)"/>
+                <xsd:element name="PropertyValue" type="xsd:string" nillable="true" prodata:format="x(256)"/>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="ttDBM_ShortDescription" minOccurs="0" maxOccurs="unbounded">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="ReconcileMode" type="xsd:int" nillable="true" prodata:format="z9"/>
+                <xsd:element name="ReconcileModeTxt" type="xsd:string" nillable="true" prodata:format="x(20)"/>
+                <xsd:element name="RecoSeq" type="xsd:int" nillable="true" prodata:format="zzz,zzz,zz9"/>
+                <xsd:element name="ChangedFields" type="xsd:string" nillable="true" prodata:format="x(256)"/>
+                <xsd:element name="AddedFields" type="xsd:string" nillable="true" prodata:format="x(256)"/>
+                <xsd:element name="WhereClausePrimary" type="xsd:string" nillable="true" prodata:format="x(256)"/>
+                <xsd:element name="WhereClauseObj" type="xsd:string" nillable="true" prodata:format="x(256)"/>
+                <xsd:element name="Owning_Obj" type="xsd:string" nillable="true" prodata:format="x(60)" prodata:columnLabel="Owning_Obj"/>
+                <xsd:element name="ShortDesc1" type="xsd:string" nillable="true" prodata:format="x(80)" prodata:label="Bezeichnung" prodata:columnLabel="Bezeichnung"/>
+                <xsd:element name="ShortDesc2" type="xsd:string" nillable="true" prodata:format="x(80)" prodata:label="Bezeichnung 2" prodata:columnLabel="Bezeichnung 2"/>
+                <xsd:element name="ShortDesc3" type="xsd:string" nillable="true" prodata:format="x(80)" prodata:label="Bezeichnung 3" prodata:columnLabel="Bezeichnung 3"/>
+                <xsd:element name="ShortDesc4" type="xsd:string" nillable="true" prodata:format="x(80)" prodata:label="Bezeichnung 4" prodata:columnLabel="Bezeichnung 4"/>
+                <xsd:element name="Sprache" type="xsd:string" nillable="true" default="D" prodata:format="x(3)" prodata:columnLabel="Spr"/>
+                <xsd:element name="Reconcile_Obj" type="xsd:string" nillable="true" prodata:format="x(60)" prodata:columnLabel="Reconcile_Obj"/>
+                <xsd:element name="ttDBM_ShortDescriptionOld" minOccurs="0" maxOccurs="unbounded">
+                  <xsd:complexType>
+                    <xsd:sequence>
+                      <xsd:element name="RecoSeq" type="xsd:int" nillable="true" prodata:format="zzz,zzz,zz9"/>
+                      <xsd:element name="Owning_Obj" type="xsd:string" nillable="true" prodata:format="x(60)" prodata:columnLabel="Owning_Obj"/>
+                      <xsd:element name="ShortDesc1" type="xsd:string" nillable="true" prodata:format="x(80)" prodata:label="Bezeichnung" prodata:columnLabel="Bezeichnung"/>
+                      <xsd:element name="ShortDesc2" type="xsd:string" nillable="true" prodata:format="x(80)" prodata:label="Bezeichnung 2" prodata:columnLabel="Bezeichnung 2"/>
+                      <xsd:element name="ShortDesc3" type="xsd:string" nillable="true" prodata:format="x(80)" prodata:label="Bezeichnung 3" prodata:columnLabel="Bezeichnung 3"/>
+                      <xsd:element name="ShortDesc4" type="xsd:string" nillable="true" prodata:format="x(80)" prodata:label="Bezeichnung 4" prodata:columnLabel="Bezeichnung 4"/>
+                      <xsd:element name="Sprache" type="xsd:string" nillable="true" default="D" prodata:format="x(3)" prodata:columnLabel="Spr"/>
+                      <xsd:element name="Reconcile_Obj" type="xsd:string" nillable="true" prodata:format="x(60)" prodata:columnLabel="Reconcile_Obj"/>
+                    </xsd:sequence>
+                  </xsd:complexType>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:unique name="Main" prodata:primaryIndex="true">
+        <xsd:selector xpath=".//ttProperty"/>
+        <xsd:field xpath="PropertyName"/>
+      </xsd:unique>
+      <xsd:unique name="ttDBM_ShortDescription_Main" prodata:indexName="Main" prodata:primaryIndex="true">
+        <xsd:selector xpath=".//ttDBM_ShortDescription"/>
+        <xsd:field xpath="ReconcileMode"/>
+        <xsd:field xpath="RecoSeq"/>
+      </xsd:unique>
+      <xsd:unique name="ttDBM_ShortDescriptionOld_Main" prodata:indexName="Main" prodata:primaryIndex="true">
+        <xsd:selector xpath=".//ttDBM_ShortDescriptionOld"/>
+        <xsd:field xpath="RecoSeq"/>
+      </xsd:unique>
+    </xsd:element>
+    <xsd:annotation>
+      <xsd:appinfo>
+        <prodata:relation name="RELATION1" prodata:nested="true" prodata:parent="ttDBM_ShortDescription" prodata:child="ttDBM_ShortDescriptionOld" prodata:relationFields="RecoSeq,RecoSeq"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+  </xsd:schema>
+  <ttProperty>
+    <PropertyName>Case_Sensitive_Index_Fields</PropertyName>
+    <PropertyValue/>
+  </ttProperty>
+  <ttProperty>
+    <PropertyName>CreationTime</PropertyName>
+    <PropertyValue>2017-02-01T14:34:42.133+01:00</PropertyValue>
+  </ttProperty>
+  <ttProperty>
+    <PropertyName>FieldList_New</PropertyName>
+    <PropertyValue>Owning_Obj,Reconcile_Obj,ShortDesc1,ShortDesc2,ShortDesc3,ShortDesc4,Sprache</PropertyValue>
+  </ttProperty>
+  <ttProperty>
+    <PropertyName>FieldList_Old</PropertyName>
+    <PropertyValue>Owning_Obj,Reconcile_Obj,ShortDesc1,ShortDesc2,ShortDesc3,ShortDesc4,Sprache</PropertyValue>
+  </ttProperty>
+  <ttProperty>
+    <PropertyName>new_pdbname</PropertyName>
+    <PropertyValue>d:/Projekte/proalpha/71b01/proalpha-data/demo/db/pavar</PropertyValue>
+  </ttProperty>
+  <ttProperty>
+    <PropertyName>old_pdbname</PropertyName>
+    <PropertyValue>d:\Projekte\proalpha\71b01\proalpha-data\demo\db\alt\pavar</PropertyValue>
+  </ttProperty>
+  <ttProperty>
+    <PropertyName>Query_Prepare_String</PropertyName>
+    <PropertyValue>for each DBM_ShortDescription where yes and (   DBM_ShortDescription.Owning_Obj begins &quot;PA1771:&quot;      or DBM_ShortDescription.Owning_Obj begins &quot;PA1772:&quot;      or DBM_ShortDescription.Owning_Obj begins &quot;PA1773:&quot;      or DBM_ShortDescription.Owning_Obj begins &quot;PA1775:&quot;) and Sprache = &quot;D&quot; use-index Main</PropertyValue>
+  </ttProperty>
+  <ttProperty>
+    <PropertyName>Section</PropertyName>
+    <PropertyValue>Classes</PropertyValue>
+  </ttProperty>
+  <ttProperty>
+    <PropertyName>Selected_Index</PropertyName>
+    <PropertyValue>Main</PropertyValue>
+  </ttProperty>
+  <ttProperty>
+    <PropertyName>Selected_Index_Fields</PropertyName>
+    <PropertyValue>Owning_Obj,Sprache</PropertyValue>
+  </ttProperty>
+  <ttProperty>
+    <PropertyName>Seq</PropertyName>
+    <PropertyValue>3</PropertyValue>
+  </ttProperty>
+  <ttProperty>
+    <PropertyName>TableNameDB</PropertyName>
+    <PropertyValue>DBM_ShortDescription</PropertyValue>
+  </ttProperty>
+  <ttProperty>
+    <PropertyName>TableNameXMLTT</PropertyName>
+    <PropertyValue>ttDBM_ShortDescription</PropertyValue>
+  </ttProperty>
+  <ttProperty>
+    <PropertyName>TableNameXMLTTOld</PropertyName>
+    <PropertyValue>ttDBM_ShortDescriptionOld</PropertyValue>
+  </ttProperty>
+  <ttProperty>
+    <PropertyName>TableVersion</PropertyName>
+    <PropertyValue>1</PropertyValue>
+  </ttProperty>
+  <ttProperty>
+    <PropertyName>XMLFormat</PropertyName>
+    <PropertyValue>3.02</PropertyValue>
+  </ttProperty>
+  <ttDBM_ShortDescription>
+    <ReconcileMode>3</ReconcileMode>
+    <ReconcileModeTxt>CREATED</ReconcileModeTxt>
+    <RecoSeq>1</RecoSeq>
+    <ChangedFields/>
+    <AddedFields/>
+    <WhereClausePrimary>where Owning_Obj = &quot;PA1775:pA:9b98cd159a2e6f8d1f14ada6a8ceccad&quot; and Sprache = &quot;D&quot;</WhereClausePrimary>
+    <WhereClauseObj/>
+    <Owning_Obj>PA1775:pA:9b98cd159a2e6f8d1f14ada6a8ceccad</Owning_Obj>
+    <ShortDesc1>internal tool to create data for testing purposes</ShortDesc1>
+    <ShortDesc2/>
+    <ShortDesc3/>
+    <ShortDesc4/>
+    <Sprache>D</Sprache>
+    <Reconcile_Obj/>
+  </ttDBM_ShortDescription>
+  <ttDBM_ShortDescription>
+    <ReconcileMode>3</ReconcileMode>
+    <ReconcileModeTxt>CREATED</ReconcileModeTxt>
+    <RecoSeq>2</RecoSeq>
+    <ChangedFields/>
+    <AddedFields/>
+    <WhereClausePrimary>where Owning_Obj = &quot;PA1775:pA:9b98cd159a2e6f8d1f14aea668a9b443&quot; and Sprache = &quot;D&quot;</WhereClausePrimary>
+    <WhereClauseObj/>
+    <Owning_Obj>PA1775:pA:9b98cd159a2e6f8d1f14aea668a9b443</Owning_Obj>
+    <ShortDesc1>Standard Class for PPCAPSTestCaseCreatorSvo.cls</ShortDesc1>
+    <ShortDesc2/>
+    <ShortDesc3/>
+    <ShortDesc4/>
+    <Sprache>D</Sprache>
+    <Reconcile_Obj/>
+  </ttDBM_ShortDescription>
+</ProDataSet>

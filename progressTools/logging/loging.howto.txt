@@ -1,0 +1,25 @@
+Das Verzeichnis stamm\base\cls in tst kopieren (SBCPersonalUtilsSvo.cls + SBCPersonalUtilsSvoStd.cls)
+
+Data Administration/reconcile/Load difference file
+Das Verzeichnis ...\logging mit den XML Dateien Classes-DBM_Description.xml/Classes-DBM_ShortDescription.xml/Classes-DRC_Instance.xml angeben und laden.
+
+Im Code:
+define variable cLogfileBase as character init 'd:/tmp/x/logile.' no-undo.
+define variable cLogfile as character no-undo.
+define variable iCnt as integer init 0 no-undo.
+define variable goUtilClass as class stamm.base.cls.SBCPersonalUtilsSvo no-undo.
+goUtilClass = new stamm.base.cls.SBCPersonalUtilsSvo().
+goUtilClass:prplUseTimestamp = yes. // Zeitstempel für jeden Logeintrag an/aus
+
+// immer neue Logdatei erzeugen
+cLogfile = cLogfileBase + string(iCnt) + '.txt'.
+do while search(cLogfile) <> ?:
+  iCnt = iCnt + 1.
+  cLogfile = cLogfileBase + string(iCnt) + '.txt'.
+end.
+goUtilClass:outFileOpen(cLogfile, yes).
+
+...
+goUtilClass:writeLine('hello world':U).
+...
+goUtilClass:outFileclose(). // optional

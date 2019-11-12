@@ -1,0 +1,3 @@
+FOR EACH MD_ARTIKEL:
+    MD_ARTIKEL.MRPRelevant=NO.
+END.
