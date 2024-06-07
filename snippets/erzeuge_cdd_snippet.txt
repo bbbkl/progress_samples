@@ -1,0 +1,47 @@
+/* create temp structure for specific MRP suggestion (simple case, no prod conf / provided part / plant order) */
+
+define buffer bMDT_MRPSuggestion for MDT_MRPSuggestion.
+define variable cMA_TempProzess_OID as character     no-undo.
+define variable goCreateTempSturcture as class mawi.prozess.cls.MACTempCreateWorkOrderSvo no-undo.
+define variable goMDCMRPSuggestion    as class mawi.dispo.cls.MDCMRPSuggestionsSvo        no-undo.
+
+assign
+  goCreateTempSturcture      = new mawi.prozess.cls.MACTempCreateWorkOrderSvo()
+  goMDCMRPSuggestion = new mawi.dispo.cls.MDCMRPSuggestionsSvo()
+  goCreateTempSturcture:prplDisableBOMRecalculation = yes
+  .
+  
+goCreateTempSturcture:ResetObject().
+
+find bMDT_MRPSuggestion
+  where bMDT_MRPSuggestion.MDT_MRPSuggestion_Obj = 'PA0886:z:cac5c943e6d46985c414e75110324fc6':U /* <--------------------------- insert MDT_MRPSuggestion_Obj */
+  no-lock.
+  
+assign
+      goCreateTempSturcture:prpcPart          = bMDT_MRPSuggestion.Artikel
+      goCreateTempSturcture:prpcPartVariant   = bMDT_MRPSuggestion.ArtVar
+      goCreateTempSturcture:prpdQuantity      = bMDT_MRPSuggestion.DemandQty
+      goCreateTempSturcture:prpcCRONumber     = bMDT_MRPSuggestion.MMM_CusRefOrder_ID
+      goCreateTempSturcture:prpcProcessArea   = 'CDD':U
+      goCreateTempSturcture:prpiMRPArea       = bMDT_MRPSuggestion.LagerGruppe
+      goCreateTempSturcture:prptRequestedDate = bMDT_MRPSuggestion.DemandDate
+      goCreateTempSturcture:prpcDocTypeCover  = bMDT_MRPSuggestion.Ref_Coverage_MRPDocType
+      goCreateTempSturcture:prpcKeyCover      = bMDT_MRPSuggestion.Ref_Coverage_Obj
+	  /*goCreateTempSturcture:prpiSupplier = 750000 */ /* bei Beistellteil den Lieferanten */
+  .
+  
+cMA_TempProzess_OID = goCreateTempSturcture:cCreateWorkOrder().
+/* cMA_TempProzess_OID = goCreateTempSturcture:cCreateWorkOrderProvPart(). */ /* bei Beistellteil diese Zeile statt die davor */
+
+mawi.prozess.cls.MACTempWorkOrderSvc:prpoInstance:scheduleRoughStructure(cMA_TempProzess_OID).
+
+goMDCMRPSuggestion:setTempStructure
+       (bMDT_MRPSuggestion.MDT_MRPSuggestion_Obj,
+        cMA_TempProzess_OID).
+goMDCMRPSuggestion:saveChanges().
+goMDCMRPSuggestion:emptyDataset().
+
+message
+  'created temp structure with obj: 'cMA_TempProzess_OID skip
+  view-as alert-box
+  title program-name(1).
